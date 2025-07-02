@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="change"></h1>
+    <button onclick=handleClick()>click me</button>
+    <button onclick=handleColoring()>change color</button>
+</body>
+<script>
+    document.getElementById('change').innerHTML = "Hello Sanath";
+    function handleClick() {
+        document.getElementById('change').innerHTML = "Good moring Sanath";
+    }
+    function handleColoring(){
+        document.getElementById('change').style.color = "red";
+    }
+</script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JS Objects</h1>
+    <p id="fruits"></p>
+
+    <script>
+        const fruits = new Array('apple', 'banana', 'orange', 'mango', 'plums');
+        let list = "<ul>";
+        for(let i=0;i<fruits.length;i++) {
+            list += "<li>" + fruits[i] + "</li>";
+        }
+        list += "</ul>";
+        document.getElementById("fruits").innerHTML = list;
+    </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+//html 
+<!-- Real Time password Indicator
+Show/Hide password
+Fully Responsive Layout( mobile, laptop, TV)
+Error Handling (clean way) -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="index14.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCET Register</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register Here</h2>
+        <form id="registerForm">
+            <div class="input-group">
+                <input type="text" id="firstName" placeholder="First Name" required>
+            </div>
+            <div id="firstNameError" class="error"></div>
+            <div class="input-group">
+                <input type="text" id="lastName" placeholder="Last Name" required >
+            </div>
+            <div id="lastNameError" class="error"></div>
+ 
+            <div class="input-group">
+                <input type="email" id="email" placeholder="email" required>
+            </div>
+            <div id="emailError" class="error"></div>
+ 
+            <div class="input-group">
+                <input type="password" id="password" placeholder="password" required>
+                <span class="material-icons" id="togglePassword">visibility</span>
+            </div>
+            <div id="passwordStrength" class="strength"></div>
+            <div id="passwordError" class="error"></div>
+            <div class="input-group">
+                <input type="password" id="confirmPassword" placeholder="confirmPassword" required>
+                <span class="material-icons" id="toggleConfirmPassword">visibility</span>
+            </div>
+            <div id="confirmPasswordError" class="error"></div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <script src="index14.js"></script>
+</body>
+</html>
+
+
+//css
+* {
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef1f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+ 
+.register-container{
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    position: relative;
+}
+.register-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: rgb(27, 233, 164);
+}
+ 
+.input-group{
+    position: relative;
+    margin-bottom: 15px;
+}
+ 
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    padding-right: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+ 
+.material-icons {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #888;
+}
+ 
+.error {
+    color: darkred;
+    font-size: 0.85rem;
+    margin-top: -5px;
+    margin-bottom: 8px;
+}
+ 
+.strength {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+ 
+.weak {
+    color: red;
+}
+.medium {
+    color: orange;
+}
+.strong {
+    color: green;
+}
+ 
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #357ae8;
+}
+
+//responsive webdesign
+@media(min-width: 768px) {
+     .register-container { max-width: 500px; padding: 40px;}
+}
+@media(min-width: 1024px) {  //laptop and some tablet screen
+    .register-container { max-width: 600px; padding: 50px;}
+    .register-container h2 { font-size: 2rem;}
+     input, button { font-size: 1.1rem;}
+}
+@media(min-width: 1924px) {  //laptop and some tablet screen
+    .register-container {max-width: 700px; padding: 50px}
+    .register-container h2 {font-size: 2rem;}
+    input, button { font-size: 1.1rem; }
+}
+@media(min-width: 3840px) {  //tv size (atleast 42 inches)
+    .register-container {max-width: 1000px; padding: 80px}
+    .register-container h2 {font-size: 3rem;}
+    input, button { font-size: 1.5rem; }
+}
+
+//js
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const passwordStrength = document.getElementById("passwordStrength");
+const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+ 
+togglePassword.addEventListener("click", () => {
+    passwordInput.type = passwordInput.type === "password" ? "text": "password";
+    togglePassword.textContent = passwordInput.type === "password" ? "visibility" : "visibility_off"
+});
+ 
+toggleConfirmPassword.addEventListener("click", () => {
+    confirmPasswordInput.type = confirmPasswordInput.type === "password" ? "text": "password";
+    toggleConfirmPassword.textContent = confirmPasswordInput.type === "password" ? "visibility" : "visibility_off"
+})
+ 
+ 
+passwordInput.addEventListener("input", () => {
+    const value = passwordInput.value;
+    let strength = ""
+    let className = ""
+ 
+    if(value.length<6) {
+        strength = "Weak";
+        className = "weak"
+    } else if (value.match(/[A-Za-z]/) && value.match(/[0-9]/) && value.length >=6 && value.length < 10) {
+        strength = "Medium";
+        className = "medium"
+    } else if (value.match(/[A-Z]/) && value.match(/[a-z]/) && value.match(/[0-9]/) && value.match(/[\W_]/) && value.length >= 10) {
+        strength = "Strong";
+        className = "strong"
+    }
+ 
+    passwordStrength.textContent = strength
+    passwordStrength.className = `strength ${className}`
+});
+ 
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const firstName = document.getElementById("firstName").value.trim()
+    const lastName = document.getElementById("lastName").value.trim()
+    const email = document.getElementById("email").value.trim()
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value
+ 
+    const emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+ 
+    const firstNameError = document.getElementById("firstNameError")
+    const lastNameError = document.getElementById("lastNameError")
+    const emailError = document.getElementById("emailError")
+    const passwordError = document.getElementById("passwordError")
+    const confirmPasswordError = document.getElementById("confirmPasswordError")
+ 
+    firstNameError.textContent = ""
+    lastNameError.textContent = ""
+    emailError.textContent = ""
+    passwordError.textContent = ""
+    confirmPasswordError.textContent = ""
+ 
+    let isValid = true;
+ 
+    if(firstName === "") {
+        firstNameError.textContent = "First Name cannot be empty";
+        isValid = false
+    }
+    if(lastName === "") {
+        lastNameError.textContent = "Last Name cannot be empty";
+        isValid = false
+    }
+    if(!email.match(emailPattern)) {
+        emailError.textContent = "Email is not valid "
+        isValid = false
+    }
+    if(password.length < 6) {
+        passwordError.textContent = "Password must be atleast 6 character"
+        isValid = false
+    }
+ 
+    if(password !== confirmPassword) {
+        confirmPasswordError.textContent = "Entered Password does not match with Confirm Password"
+        isValid = false
+    }
+ 
+    if(isValid) {
+        alert("Registration successfull")
+    }
+})

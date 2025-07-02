@@ -1,0 +1,4 @@
+SDLC, SDTC
+color palattes
+wireframes
+deployment servers

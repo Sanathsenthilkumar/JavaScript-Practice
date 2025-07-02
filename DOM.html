@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="DOM.css">
+</head>
+
+<body>
+    <div class="loginContainer">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <!--Regex pattern can also be entered within html-->
+            <label for="email">Email</label><br>
+            <input type="email" name="email"  id="email" placeholder="email" pattern="^[^ ]+@[^]+\.[a-z]{2,3}" title="Enter a valid email"><br />
+            <div id="emailError" class="error"></div>
+            <label for="password">Password</label><br>
+            <input type="password" name="password"  id="password" placeholder="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required /><br />
+            <div id="passwordError" class="error"></div>
+            <button type="submit">Login</button>
+            <!-- <p id="show"></p> -->
+        </form>
+    </div>
+</body>
+
+<script>
+    // function handleSubmit() {
+    //     const email = document.getElementById("email").value;
+    //     const password = document.getElementById("password").value;
+    //     // document.getElementById("show").innerHTML = email +" "+password;
+    //     // console.log(email+" "+password);
+    //     document.write(email + " " + password);
+    // }
+    
+    // document.getElementById("loginForm").addEventListener("submit", function(event){
+    //     event.preventDefault(); // prevents page load on submit.
+    //     const email = document.getElementById("email").value.trim();
+    //     const password = document.getElementById("password").value.trim();
+    //     //fetch errors too
+    //     const emailError = document.getElementById("emailError");
+    //     const passwordError = document.getElementById("passwordError");
+    //     emailError.textContent = ""
+    //     passwordError.textContent = ""
+
+    //     //check if email and password is valid using regex (regular expressions).
+    //     //email regex -> const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    //     //password regex -> const re = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/
+    //     let isValid = true;
+    //     // const emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    //     // if(!email.match(emailPattern)) {
+    //     //     emailError.textContent = "Please enter a valid email";
+    //     //     isValid = false;
+    //     // }
+    //     const passwordPattern = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    //     if(!password.match(passwordPattern)) {
+    //         passwordError.textContent ="Enter a valid password";
+    //         isValid = false;
+    //     }
+    //     if(isValid){
+    //         alert("Login Success");
+    //     }
+    // })  //using event listener
+
+
+    // for clean HTML with less JS methods we can use addEventListener
+    document.getElementById("loginForm").addEventListener("submit", function(event){
+        event.preventDefault();
+
+        const form = event.target;
+        if(form.checkValidity()) {
+            alert("Login Success");
+        } else {
+            form.reportValidity();
+        }
+    })
+</script>
+</html>

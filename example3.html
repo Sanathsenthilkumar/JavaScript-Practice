@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="show-object"></p>
+    <p id="display-using-loop"></p>
+    <p id="vector-method"></p>
+    <p id="JSON-string"></p>
+    <script>
+    let fruits = {
+        first: "apple",
+        second: "banana",
+        third: "orange",
+    }    
+
+    document.getElementById("show-object").innerHTML = "Method 1: " + fruits.first + ", " + fruits.second + ", " + fruits.third;
+    
+    let value = "";
+    for(let i in fruits) {
+        value += fruits[i] + ", ";
+    }
+    document.getElementById("display-using-loop").innerHTML = "Method 2: " + value
+
+    const myData = Object.values(fruits);
+    document.getElementById("vector-method").innerHTML = 'Method 3: ' + myData
+
+    document.getElementById("JSON-string").innerHTML = "Method 4: " + JSON.stringify(fruits);
+    </script>
+</body>
+</html>
